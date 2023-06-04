@@ -13,3 +13,20 @@ const path = require('path');
 app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, '/public/notes.html')));
 
 app.get('*', (req, res) => res.sendFile(path.join(__dirname, '/public/index.html')));
+
+const fs = require('fs');
+const { v4: uuidv4 } = require('uuid');
+
+app.get('/api/notes', (req, res) => {
+    let notes = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
+    res.json(notes);
+});
+
+app.post('/api/notes', (req, res) => {
+    let notes = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
+    let newNote = req.body;
+    newNote.id = uuidv4();
+    notes.push(newNote);
+    fs.writeFileSync('./db/db.json', JSON.stringify(notes));
+    res.json(notes);
+});
