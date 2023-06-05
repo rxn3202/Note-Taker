@@ -54,5 +54,6 @@ THEN I am presented with empty fields to enter a new note title and the note’s
 
 View Live Deployment via Heroku [Heroku](https://heroku.com)
 
-![alt text](./assets/images/svglogomaker.png)
-![alt text](./assets/images/svglogomaker.png)
+![alt text](./assets/images/home%20page.png)
+![alt text](./assets/images/test%201.png)
+![alt text](./assets/images/test%202.png)
