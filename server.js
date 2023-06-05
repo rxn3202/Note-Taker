@@ -1,17 +1,19 @@
+// Import necessary NPM packages
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 
+// Initialize Express.js app and define port
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Express app to handle data parsing
+// Middleware for data parsing in Express.js
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// API routes
+// API route to retrieve notes from the JSON file
 app.get("/api/notes", (req, res) => {
   fs.readFile("./db/db.json", (err, data) => {
     if (err) throw err;
@@ -19,9 +21,10 @@ app.get("/api/notes", (req, res) => {
   });
 });
 
+// API route to create a new note with a unique ID and save it in the JSON file
 app.post("/api/notes", (req, res) => {
   const newNote = req.body;
-  newNote.id = uuidv4();
+  newNote.id = uuidv4(); // Assign a unique ID to the note
   
   fs.readFile("./db/db.json", (err, data) => {
     if (err) throw err;
@@ -35,6 +38,7 @@ app.post("/api/notes", (req, res) => {
   });
 });
 
+// API route to delete a note from the JSON file based on its unique ID
 app.delete("/api/notes/:id", (req, res) => {
   const noteId = req.params.id;
   
@@ -50,15 +54,17 @@ app.delete("/api/notes/:id", (req, res) => {
   });
 });
 
-// HTML routes
+// HTML route to display notes page
 app.get("/notes", (req, res) => {
   res.sendFile(path.join(__dirname, "./public/notes.html"));
 });
 
+// HTML route to display the home page
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./public/index.html"));
 });
 
+// Start the server on the specified port
 app.listen(PORT, () => {
   console.log(`App listening on PORT: ${PORT}`);
 });
