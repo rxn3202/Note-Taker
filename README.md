@@ -52,7 +52,7 @@ THEN I am presented with empty fields to enter a new note title and the note’s
 
 ##  Mock-up
 
-View Live Deployment via Heroku [Heroku](https://heroku.com)
+View Live Deployment via Heroku [Heroku](https://rxn-note-taker.herokuapp.com/)
 
 ![alt text](./assets/images/home%20page.png)
 ![alt text](./assets/images/test%201.png)
